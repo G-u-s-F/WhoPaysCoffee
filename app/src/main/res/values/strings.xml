@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Who pays coffee</string>
+    <string name="user">Usuari</string>
+    <string name="user_name">Nom Usuari</string>
+    <string name="password">Contrasenya</string>
+    <string name="action_sign_in">Entra</string>
+    <string name="alta_text">Donar-se d\'alta</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_admin_main">AdminMainActivity</string>
+</resources>

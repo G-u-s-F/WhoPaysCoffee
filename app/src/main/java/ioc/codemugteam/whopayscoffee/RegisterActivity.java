@@ -1,14 +1,14 @@
 package ioc.codemugteam.whopayscoffee;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.ims.RegistrationManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,6 +27,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
     EditText userName, email, password;
     Button btnReg;
+    User usuari;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +36,16 @@ public class RegisterActivity extends AppCompatActivity {
         userName = findViewById(R.id.edit_Text_Reg_Usuari);
         email = findViewById(R.id.edit_Text_Reg_Email);
         password = findViewById(R.id.edit_Text_Reg_Password);
-        btnReg = findViewById(R.id.btn_Registre);
+        btnReg = findViewById(R.id.btn_Registra);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addNewUser(userName.getText().toString(), email.getText().toString(), password.getText().toString());
-
+                if (userName.getText().toString().isEmpty() || email.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
+                    Toast.makeText(RegisterActivity.this,"Falta alguna dada", Toast.LENGTH_LONG).show();
+                } else {
+                    addNewUser(userName.getText().toString(), email.getText().toString(), password.getText().toString());
+                }
             }
         });
     }
@@ -64,13 +68,16 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(RegisterActivity.this,"Usuari registrat correctament", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegisterActivity.this, UserMainActivity.class);
+                        intent.putExtra("user",response.toString());
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegisterActivity.this,"Error al registre", Toast.LENGTH_LONG).show();
                         Log.e("Error alta usuari", error.getMessage());
-
                     }
                 }){
                     @Override
@@ -80,8 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
                         return headers;
                     }
                 };
-
         queue.add(jsonObjectRequest);
-
     }
 }

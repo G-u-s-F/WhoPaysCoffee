@@ -11,4 +11,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_admin_main">AdminMainActivity</string>
+    <!-- Activity de registro -->
+    <string name="txt_registre_usuari">"Alta nou usuari"</string>
+    <string name="txt_user_name">"Nom d\'usuari"</string>
+    <string name="txt_email">"E-mail"</string>
+    <string name="btn_register">"Registra"</string>
+    <string name="btn_cancel">"Cancel·la"</string>
 </resources>

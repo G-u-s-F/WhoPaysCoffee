@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UserMainActivity">
+
+    <item android:id="@+id/group_user_item"
+        android:title="Grups"/>
+
+    <item android:id="@+id/estadistic_user_item"
+        android:title="Estadística"/>
+
+    <item android:id="@+id/config_user_item"
+        android:title="Configuració"/>
+
+    <item android:id="@+id/logout_user_item"
+        android:title="Sortir"
+        android:icon="@drawable/ic_logout"/>
+
+</menu>

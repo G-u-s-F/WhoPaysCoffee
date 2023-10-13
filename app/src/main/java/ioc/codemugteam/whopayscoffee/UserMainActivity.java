@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,9 +45,14 @@ public class UserMainActivity extends AppCompatActivity {
 
         if (id==R.id.logout_user_item){
 
+            userLogout();
             return true;
         }
 
         return super.onOptionsItemSelected(menuOption);
+    }
+
+    private void userLogout(){
+        Toast.makeText(UserMainActivity.this,"Logout", Toast.LENGTH_LONG).show();
     }
 }

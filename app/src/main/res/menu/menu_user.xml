@@ -12,8 +12,9 @@
     <item android:id="@+id/config_user_item"
         android:title="Configuració"/>
 
-    <item android:id="@+id/logout_user_item"
-        android:title="Sortir"
-        android:icon="@drawable/ic_logout"/>
+    <item
+        android:id="@+id/logout_user_item"
+        android:icon="@drawable/ic_logout"
+        android:title="Sortir"/>
 
 </menu>

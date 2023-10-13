@@ -56,6 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_user"
         app:subtitleTextColor="#FADFD0"
         app:title="@string/user"
         app:titleTextColor="#FADFD0" />

@@ -6,7 +6,28 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:scrollbars="vertical"
-    tools:context=".AdminMainActivity">
+    tools:context=".UserMainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/user_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:subtitleTextColor="#FADFD0"
+            app:menu="@menu/user_menu"
+            app:titleTextColor="#FADFD0" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -45,20 +66,5 @@
             app:srcCompat="@drawable/user_config" />
 
     </LinearLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/user_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_user"
-        app:subtitleTextColor="#FADFD0"
-        app:title="@string/user"
-        app:titleTextColor="#FADFD0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,9 +23,11 @@ public class UserMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
         toolbar = findViewById(R.id.user_toolbar);
+        setSupportActionBar(toolbar);
         Intent intent = getIntent();
         jsonMsg = intent.getStringExtra("user");
         try {
+            assert jsonMsg != null;
             jsonUser = new JSONObject(jsonMsg);
             toolbar.setTitle(jsonUser.getString("name"));
         } catch (JSONException e) {
@@ -33,26 +35,40 @@ public class UserMainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu userMenu){
-        getMenuInflater().inflate(R.menu.menu_user,userMenu);
+        getMenuInflater().inflate(R.menu.user_menu,userMenu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuOption){
+
         int id = menuOption.getItemId();
-
-        if (id==R.id.logout_user_item){
-
-            userLogout();
-            return true;
+        if (id == R.id.user_gups_item){
+            Toast.makeText(this,"Grups", Toast.LENGTH_SHORT).show();
         }
 
-        return super.onOptionsItemSelected(menuOption);
+        if (id == R.id.user_estadistic_item){
+            Toast.makeText(this,"Estadística", Toast.LENGTH_SHORT).show();
+        }
+
+        if (id == R.id.user_conf_item){
+            Toast.makeText(this,"Configuració", Toast.LENGTH_SHORT).show();
+        }
+
+        if (id == R.id.user_logout_item){
+            userLogout();
+            Toast.makeText(UserMainActivity.this,"logout", Toast.LENGTH_SHORT).show();
+        }
+
+        return true;
+        //return super.onOptionsItemSelected(menuOption);
     }
 
     private void userLogout(){
+
         Toast.makeText(UserMainActivity.this,"Logout", Toast.LENGTH_LONG).show();
     }
 }

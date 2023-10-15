@@ -1,17 +1,26 @@
-package ioc.codemugteam.whopayscoffee;
+/**
+ * @author Gustavo Ferrario Barber
+ * M13 DAM 2023-24 S1
+ */
 
-import androidx.appcompat.app.AppCompatActivity;
+package ioc.codemugteam.whopayscoffee;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserMainActivity extends AppCompatActivity {
 
@@ -59,16 +68,46 @@ public class UserMainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.user_logout_item){
-            userLogout();
-            Toast.makeText(UserMainActivity.this,"logout", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserMainActivity.this,"Desconectant usuari", Toast.LENGTH_SHORT).show();
+            try {
+                userLogout(jsonUser);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return true;
-        //return super.onOptionsItemSelected(menuOption);
     }
 
-    private void userLogout(){
+    private void userLogout(JSONObject user) throws JSONException {
 
-        Toast.makeText(UserMainActivity.this,"Logout", Toast.LENGTH_LONG).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://192.168.0.21:8080/coffee/api/auth/logout";
+        String autoritzacio = user.getString("head") + " " + user.getString("token");
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    finish();
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(UserMainActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", autoritzacio);
+                return headers;
+            }
+        };
+        queue.add(request);
+
     }
 }

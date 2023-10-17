@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void addNewUser(String name, String email, String password){
 
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-        String url = "http://192.168.0.21:8080/coffee/api/auth/p/register";
+        String url = getString(R.string.serverIP) + "/coffee/api/auth/p/register";
 
         final JSONObject data = new JSONObject();
         try {
@@ -71,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this,"Usuari registrat correctament", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, UserMainActivity.class);
                         intent.putExtra("user",response.toString());
+                        finish();
                         startActivity(intent);
                     }
                 }, new Response.ErrorListener() {

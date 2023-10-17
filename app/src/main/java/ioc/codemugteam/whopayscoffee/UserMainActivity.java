@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,23 +28,35 @@ import java.util.Map;
 public class UserMainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    TextView txtUser;
     JSONObject jsonUser;
     String jsonMsg;
+    ImageView imgGrups, imgStats, imgConf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
         toolbar = findViewById(R.id.user_toolbar);
+        txtUser = findViewById(R.id.textView_userMain_user);
+        imgConf = findViewById(R.id.imgConf);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         jsonMsg = intent.getStringExtra("user");
         try {
             assert jsonMsg != null;
             jsonUser = new JSONObject(jsonMsg);
-            toolbar.setTitle(jsonUser.getString("name"));
+            txtUser.setText(jsonUser.getString("name"));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+
+        imgConf.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                openConf(jsonMsg);
+            }
+        });
     }
 
 
@@ -64,6 +79,7 @@ public class UserMainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.user_conf_item){
+            openConf(jsonMsg);
             Toast.makeText(this,"Configuració", Toast.LENGTH_SHORT).show();
         }
 
@@ -79,10 +95,16 @@ public class UserMainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void openConf(String jsonMsg){
+        Intent intent = new Intent(UserMainActivity.this, UserConfActivity.class);
+        intent.putExtra("user", jsonMsg);
+        startActivity(intent);
+    }
+
     private void userLogout(JSONObject user) throws JSONException {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.0.21:8080/coffee/api/auth/logout";
+        String url = getString(R.string.serverIP) + "/coffee/api/auth/logout";
         String autoritzacio = user.getString("head") + " " + user.getString("token");
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {

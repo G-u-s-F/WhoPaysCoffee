@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String userName, String pass){
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-        String url = "http://192.168.0.21:8080/coffee/api/auth/p/login";
+        String url = getString(R.string.serverIP) + "/coffee/api/auth/p/login";
 
         final JSONObject data = new JSONObject();
         try {

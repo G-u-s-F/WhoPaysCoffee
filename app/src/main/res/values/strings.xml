@@ -1,4 +1,5 @@
 <resources>
+    <string name="serverIP">http://192.168.0.21:8080</string>
     <string name="app_name">Who pays coffee</string>
     <string name="user">Usuari</string>
     <string name="user_name">Nom Usuari</string>
@@ -22,4 +23,7 @@
     <string name="user_menu_estadistic">"Estadístic"</string>
     <string name="user_menu_conf">"Configuració"</string>
     <string name="user_menu_logout">"Sortir"</string>
+    <!-- Conf Usuari -->
+    <string name="conf_toolbar_name">"Dades Usuari"</string>
+    <string name="change_pass">"Canviar la contrasenya"</string>
 </resources>

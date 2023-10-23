@@ -91,7 +91,6 @@ public class UserMainActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
-
         return true;
     }
 

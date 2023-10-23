@@ -28,7 +28,7 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText userName, email, password;
-    Button btnReg;
+    Button btnReg, btnCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +38,22 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.edit_Text_Reg_Email);
         password = findViewById(R.id.edit_Text_Reg_Password);
         btnReg = findViewById(R.id.btn_Registra);
+        btnCancel = findViewById(R.id.btn_reg_cancel);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (userName.getText().toString().isEmpty() || email.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
                     Toast.makeText(RegisterActivity.this,"Falta alguna dada", Toast.LENGTH_LONG).show();
                 } else {
                     addNewUser(userName.getText().toString(), email.getText().toString(), password.getText().toString());
                 }
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
@@ -58,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final JSONObject data = new JSONObject();
         try {
-            data.put("name", name);
+            data.put("username", name);
             data.put("email", email);
             data.put("password", password);
         } catch (JSONException e) {

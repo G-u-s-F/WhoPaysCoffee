@@ -8,17 +8,23 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/tazacafe"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/tazacafe"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhoPaysCoffee"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AdminGrupsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminUsersActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserConfActivity"
             android:exported="false"
-            android:parentActivityName=".UserMainActivity"/>
+            android:parentActivityName=".UserMainActivity" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />

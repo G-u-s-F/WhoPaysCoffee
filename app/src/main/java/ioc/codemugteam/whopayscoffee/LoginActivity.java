@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText userName, password;
     TextView alta;
     Button btnLogin;
+    JSONObject userJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login(userName.getText().toString(), password.getText().toString());
+                if (userName.getText().toString().contains("@")) {
+                    loginUser(userName.getText().toString(), password.getText().toString());
+                } else {
+                    loginAdmin(userName.getText().toString(), password.getText().toString());
+                }
             }
         });
 
@@ -66,11 +71,16 @@ public class LoginActivity extends AppCompatActivity {
         password.setText("");
     }
 
-    private void login(String userName, String pass){
+    /**
+     * Funció que envia al servidor la crida per connectar un usuari
+     * @param userName
+     * @param pass
+     */
+    private void loginUser(String userName, String pass){
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-        String url = getString(R.string.serverIP) + "/coffee/api/auth/p/login";
+        String url = getString(R.string.serverURL) + "/coffee/api/auth/p/login";
 
-        final JSONObject data = new JSONObject();
+        JSONObject data = new JSONObject();
         try {
             data.put("email", userName);
             data.put("password", pass);
@@ -102,4 +112,43 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    /**
+     * Funció que envia al servidor la crida per connectar un administrador
+     * @param userName
+     * @param pass
+     */
+    private void loginAdmin(String userName, String pass){
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        String url = getString(R.string.serverURL) + "/coffee/api/admin/p/login";
+
+        JSONObject data = new JSONObject();
+        try {
+            data.put("username", userName);
+            data.put("password", pass);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, url, data, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class);
+                        intent.putExtra("admin", response.toString());
+                        startActivity(intent);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this,"Administrador desconegut", Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        queue.add(jsonObjectRequest);
+    }
 }

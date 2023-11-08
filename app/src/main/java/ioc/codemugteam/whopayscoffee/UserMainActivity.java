@@ -37,7 +37,7 @@ public class UserMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
         toolbar = findViewById(R.id.user_toolbar);
-        txtUser = findViewById(R.id.textView_userMain_user);
+        txtUser = findViewById(R.id.textView_userMain);
         imgConf = findViewById(R.id.imgConf);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
@@ -86,7 +86,7 @@ public class UserMainActivity extends AppCompatActivity {
         if (id == R.id.user_logout_item){
             Toast.makeText(UserMainActivity.this,"Desconectant usuari", Toast.LENGTH_SHORT).show();
             try {
-                userLogout(jsonUser);
+                logoutUser(jsonUser);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
@@ -100,10 +100,15 @@ public class UserMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void userLogout(JSONObject user) throws JSONException {
+    /**
+     * Funció que envia al servidor la crida per desconnectar l'usuari
+     * @param user
+     * @throws JSONException
+     */
+    private void logoutUser(JSONObject user) throws JSONException {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = getString(R.string.serverIP) + "/coffee/api/auth/logout";
+        String url = getString(R.string.serverURL) + "/coffee/api/auth/logout";
         String autoritzacio = user.getString("head") + " " + user.getString("token");
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
@@ -129,6 +134,5 @@ public class UserMainActivity extends AppCompatActivity {
             }
         };
         queue.add(request);
-
     }
 }

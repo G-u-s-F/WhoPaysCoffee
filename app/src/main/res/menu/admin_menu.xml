@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/user_gups_item"
+        android:id="@+id/admin_users_item"
+        android:title="@string/item_menu_usuaris"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/admin_grups_item"
         android:title="@string/item_menu_grups"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/user_estadistic_item"
-        android:title="@string/item_menu_estadistic"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/user_conf_item"
-        android:title="@string/item_menu_conf"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/user_logout_item"
+        android:id="@+id/admin_logout_item"
         android:icon="@drawable/ic_logout"
         android:title="@string/item_menu_logout"
         app:showAsAction="ifRoom" />

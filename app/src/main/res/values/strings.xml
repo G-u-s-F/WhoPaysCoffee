@@ -1,6 +1,6 @@
 <resources>
-    <!-- <string name="serverIP">http://192.168.0.21:8080</string> -->
-    <string name="serverIP">https://who-pays-coffee.onrender.com</string>
+    <string name="serverURL">http://192.168.0.21:8080</string> <!-- Server en local-->
+    <!-- <string name="serverIP">https://who-pays-coffee.onrender.com</string> Server online-->
     <string name="app_name">Who pays coffee</string>
     <string name="user">Usuari</string>
     <string name="user_name">Nom Usuari</string>
@@ -19,12 +19,16 @@
     <string name="txt_email">"E-mail"</string>
     <string name="btn_register">"Registra"</string>
     <string name="btn_cancel">"Cancel·la"</string>
-    <!-- Menú usuari -->
-    <string name="user_menu_grups">"Grups"</string>
-    <string name="user_menu_estadistic">"Estadístic"</string>
-    <string name="user_menu_conf">"Configuració"</string>
-    <string name="user_menu_logout">"Sortir"</string>
+    <!-- Menú usuari i admin -->
+    <string name="item_menu_grups">"Grups"</string>
+    <string name="item_menu_usuaris">"Usuaris"</string>
+    <string name="item_menu_estadistic">"Estadístic"</string>
+    <string name="item_menu_conf">"Configuració"</string>
+    <string name="item_menu_logout">"Sortir"</string>
     <!-- Conf Usuari -->
     <string name="conf_toolbar_name">"Dades Usuari"</string>
     <string name="change_pass">"Canviar la contrasenya"</string>
+    <!-- Administracio usuaris i grups -->
+    <string name="admin_user_tittle">"Adm. usuaris"</string>
+    <string name="admin_grup_tittle">"Adm. grups"</string>
 </resources>

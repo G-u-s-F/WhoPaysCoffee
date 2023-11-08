@@ -7,15 +7,40 @@
     android:background="@drawable/bg"
     tools:context=".AdminMainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/admin_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/user_menu"
+        app:subtitleTextColor="#FADFD0"
+        app:titleTextColor="#FADFD0" />
+
+    <TextView
+        android:id="@+id/textView_adminMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="#FADFD0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_toolbar" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_user">
+        app:layout_constraintTop_toBottomOf="@+id/admin_toolbar">
 
         <TextView
             android:id="@+id/txt_gestio_app"
@@ -24,11 +49,11 @@
             android:gravity="center"
             android:text="@string/gestio_app"
             android:textColor="#FADFD0"
-            android:textSize="48sp"
+            android:textSize="34sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgUsersAdmin"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
@@ -37,7 +62,7 @@
             app:srcCompat="@drawable/user_icon2" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imgGrupsAdmin"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
@@ -46,20 +71,5 @@
             app:srcCompat="@drawable/group_icon2" />
 
     </LinearLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:subtitle="nomAdmin"
-        app:subtitleTextColor="@color/white"
-        app:title="Admin"
-        app:titleTextColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

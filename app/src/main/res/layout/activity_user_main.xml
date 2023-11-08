@@ -14,12 +14,15 @@
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/user_menu"
         app:subtitleTextColor="#FADFD0"
         app:titleTextColor="#FADFD0" />
 
     <TextView
-        android:id="@+id/textView_userMain_user"
+        android:id="@+id/textView_userMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

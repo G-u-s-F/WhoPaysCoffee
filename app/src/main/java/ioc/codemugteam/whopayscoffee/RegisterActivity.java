@@ -58,10 +58,16 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funció que envia al servidor la crida per registrar un nou usuari
+     * @param name
+     * @param email
+     * @param password
+     */
     private void addNewUser(String name, String email, String password){
 
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-        String url = getString(R.string.serverIP) + "/coffee/api/auth/p/register";
+        String url = getString(R.string.serverURL) + "/coffee/api/auth/p/register";
 
         final JSONObject data = new JSONObject();
         try {

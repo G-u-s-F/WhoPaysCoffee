@@ -17,7 +17,7 @@ public class AdminGrupsActivity extends AppCompatActivity {
 
     private String[] grups = {"grup 1", "grup 2", "grup 3", "grup 4"};
     private final List<String> list = Arrays.asList(grups);
-    private final LinkedList<String> itemsList = new LinkedList<String>(list);
+    private final List<String> itemsList = new LinkedList<String>(list);
 
     private RecyclerView recyclerView;
     private ItemsAdapter itemsAdapter;
@@ -28,7 +28,7 @@ public class AdminGrupsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_gups);
 
         recyclerView = findViewById(R.id.items_recyclerview);
-        itemsAdapter = new ItemsAdapter(this, itemsList);
+        //itemsAdapter = new ItemsAdapter(this, itemsList);
         recyclerView.setAdapter(itemsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         toolbar = findViewById(R.id.admin_grups_toolbar);

@@ -5,25 +5,20 @@
 
 package ioc.codemugteam.whopayscoffee;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -32,7 +27,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class UserConfActivity extends AppCompatActivity {
 
@@ -85,11 +79,9 @@ public class UserConfActivity extends AppCompatActivity {
         canviPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    changePass(jsonUser, "654321");
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
+                Intent intent=new Intent(UserConfActivity.this, passwordChangeActivity.class);
+                intent.putExtra("user", jsonMsg);
+                startActivity(intent);
             }
         });
     }
@@ -132,47 +124,4 @@ public class UserConfActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    /**
-     * Funció que envia al servidor la crida per canviar la contrasenya de l'usuari
-     * @param newPass
-     * @return result
-     */
-    public void changePass (JSONObject user, String newPass) throws JSONException {
-
-        RequestQueue queue = Volley.newRequestQueue(UserConfActivity.this);
-        String url = getString(R.string.serverURL) + "/coffee/api/auth/modPassword";
-        String autoritzacio = user.getString("head") + " " + user.getString("token");
-        final JSONObject body = new JSONObject();
-        try {
-            body.put("password", newPass);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        StringRequest request = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(UserConfActivity.this, response, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(UserConfActivity.this, "error = " + error, Toast.LENGTH_SHORT).show();
-            }
-        }){
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json");
-                headers.put("Authorization", autoritzacio);
-                return headers;
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                return body.toString().getBytes();
-            }
-
-        };
-        queue.add(request);
-    }
 }

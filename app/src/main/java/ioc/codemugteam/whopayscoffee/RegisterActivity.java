@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this,"Error al registre", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                         Log.e("Error alta usuari", Objects.requireNonNull(error.getMessage()));
                     }
                 }){

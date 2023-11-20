@@ -28,6 +28,10 @@
     <!-- Conf Usuari -->
     <string name="conf_toolbar_name">"Dades Usuari"</string>
     <string name="change_pass">"Canviar la contrasenya"</string>
+    <string name="btn_canvi">"Canvia"</string>
+    <string name="new_pass_txt">"Nova contrasenya"</string>
+    <string name="verif_new_pass_txt">"Verifica la nova contrasenya"</string>
+    <string name="check_mostra_pass">"Mostra la contrasenya</string>
     <!-- Administracio usuaris i grups -->
     <string name="admin_user_tittle">"Adm. usuaris"</string>
     <string name="admin_grup_tittle">"Adm. grups"</string>

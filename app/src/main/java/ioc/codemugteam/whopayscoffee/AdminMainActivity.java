@@ -17,12 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,7 +71,11 @@ public class AdminMainActivity extends AppCompatActivity {
         imgGrups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adminGroups();
+                try {
+                    adminGroups();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -86,7 +95,11 @@ public class AdminMainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.admin_grups_item){
-            adminGroups();
+            try {
+                adminGroups();
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         if (id == R.id.admin_logout_item){
@@ -107,11 +120,46 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void adminGroups(){
+    private void adminGroups() throws JSONException {
         Toast.makeText(this,"Grups", Toast.LENGTH_SHORT).show();
+        getAllUsers(jsonAdmin);
         Intent intent = new Intent(AdminMainActivity.this, AdminGrupsActivity.class);
         //intent.putExtra("admin", response.toString());
         startActivity(intent);
+    }
+
+    private void getAllUsers(JSONObject admin) throws JSONException {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = getString(R.string.serverURL) + "/coffee/api/admin/r/getAllUsers";
+        String autoritzacio = admin.getString("head") + " " + admin.getString("token");
+        JSONObject data = new JSONObject();
+
+        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, data, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("user");
+                    String usuaris = jsonArray.toString();
+                    Intent intent = new Intent(AdminMainActivity.this, AdminUsersActivity.class);
+                    intent.putExtra("usuaris", usuaris);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", autoritzacio);
+                return headers;
+            }
+        };
+        queue.add(jsonRequest);
     }
 
     /**

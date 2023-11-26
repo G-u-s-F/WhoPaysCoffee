@@ -38,6 +38,8 @@ public class UserMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_main);
         toolbar = findViewById(R.id.user_toolbar);
         txtUser = findViewById(R.id.textView_userMain);
+        imgGrups = findViewById(R.id.imgGrups);
+        imgStats = findViewById(R.id.imgStats);
         imgConf = findViewById(R.id.imgConf);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
@@ -50,8 +52,13 @@ public class UserMainActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
+        imgGrups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openUserGrups(jsonMsg);
+            }
+        });
         imgConf.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 openConf(jsonMsg);
@@ -71,7 +78,7 @@ public class UserMainActivity extends AppCompatActivity {
 
         int id = menuOption.getItemId();
         if (id == R.id.user_gups_item){
-            Toast.makeText(this,"Grups", Toast.LENGTH_SHORT).show();
+            openUserGrups(jsonMsg);
         }
 
         if (id == R.id.user_estadistic_item){
@@ -92,6 +99,12 @@ public class UserMainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    private void openUserGrups(String jsonMsg){
+        Intent intent = new Intent(UserMainActivity.this, UserGrupsActivity.class);
+        intent.putExtra("user", jsonMsg);
+        startActivity(intent);
     }
 
     private void openConf(String jsonMsg){

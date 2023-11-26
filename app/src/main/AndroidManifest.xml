@@ -16,6 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".NewUserGrupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserGrupsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WhoPaysCoffee" />
+        <activity
             android:name=".passwordChangeActivity"
             android:exported="false" />
         <activity

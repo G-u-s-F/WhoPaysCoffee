@@ -114,52 +114,16 @@ public class AdminMainActivity extends AppCompatActivity {
     }
 
     private void adminUsers(){
-        Toast.makeText(this,"Usuaris", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AdminMainActivity.this, AdminUsersActivity.class);
-        //intent.putExtra("admin", response.toString());
+        intent.putExtra("admin", jsonMsg);
         startActivity(intent);
     }
 
     private void adminGroups() throws JSONException {
-        Toast.makeText(this,"Grups", Toast.LENGTH_SHORT).show();
-        getAllUsers(jsonAdmin);
+        //getAllUsers(jsonAdmin);
         Intent intent = new Intent(AdminMainActivity.this, AdminGrupsActivity.class);
         //intent.putExtra("admin", response.toString());
         startActivity(intent);
-    }
-
-    private void getAllUsers(JSONObject admin) throws JSONException {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = getString(R.string.serverURL) + "/coffee/api/admin/r/getAllUsers";
-        String autoritzacio = admin.getString("head") + " " + admin.getString("token");
-        JSONObject data = new JSONObject();
-
-        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, data, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("user");
-                    String usuaris = jsonArray.toString();
-                    Intent intent = new Intent(AdminMainActivity.this, AdminUsersActivity.class);
-                    intent.putExtra("usuaris", usuaris);
-                    startActivity(intent);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", autoritzacio);
-                return headers;
-            }
-        };
-        queue.add(jsonRequest);
     }
 
     /**

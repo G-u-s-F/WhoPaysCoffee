@@ -6,52 +6,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.LinkedList;
 import java.util.List;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
+public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.ItemViewHolder>{
 
     private LayoutInflater mInflater;
-    List<Usuari> usuaris;
+    List<Grup> grups;
 
-    public ItemsAdapter(Context context, List<Usuari> usuaris){
+    public UserGrupsAdapter (Context context, List<Grup> grups){
         this.mInflater = LayoutInflater.from(context);
-        this.usuaris = usuaris;
+        this.grups = grups;
     }
-
+    @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public UserGrupsAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View itemView = mInflater.inflate(R.layout.list_item, viewGroup, false);
-        return new ItemViewHolder(itemView, this);
+        return new UserGrupsAdapter.ItemViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder viewHolder, int position) {
-        viewHolder.itemView.setText(usuaris.get(position).getName());
+    public void onBindViewHolder(@NonNull UserGrupsAdapter.ItemViewHolder viewHolder, int position) {
+        viewHolder.itemView.setText(grups.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return usuaris.size();
+        return grups.size();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemView;
         ImageView deleteIcon;
-        ItemsAdapter mAdapter;
+        UserGrupsAdapter mAdapter;
 
-        public ItemViewHolder(View view, ItemsAdapter adapter) {
+        public ItemViewHolder(View view, UserGrupsAdapter adapter) {
             super(view);
-            // Define click listener for the ViewHolder's View
             this.itemView = view.findViewById(R.id.list_item_textView);
             this.deleteIcon = view.findViewById(R.id.list_item_delete_icon);
             this.mAdapter = adapter;
@@ -71,4 +64,5 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
         }
     }
+
 }

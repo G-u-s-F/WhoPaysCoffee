@@ -35,4 +35,13 @@
     <!-- Administracio usuaris i grups -->
     <string name="admin_user_tittle">"Adm. usuaris"</string>
     <string name="admin_grup_tittle">"Adm. grups"</string>
+    <!-- Grups usuaris -->
+    <string name="user_grups_tittle">"Grups"</string>
+    <string name="btn_new_grup_acepta">"Afegir"</string>
+    <string name="txt_new_grup">"Nom del grup:"</string>
+    <string-array name="userGrupsSpinnerItems">
+        <item>Tots</item>
+        <item>Propietari</item>
+        <item>Membre</item>
+    </string-array>
 </resources>

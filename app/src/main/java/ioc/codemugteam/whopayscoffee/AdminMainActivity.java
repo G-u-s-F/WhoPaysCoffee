@@ -103,7 +103,6 @@ public class AdminMainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.admin_logout_item){
-            //Toast.makeText(AdminMainActivity.this,"Desconectant administrador", Toast.LENGTH_SHORT).show();
             try {
                 logoutAdmin(jsonAdmin);
             } catch (JSONException e) {

@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".NewMembreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MembreDetallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GrupDetallActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewUserGrupActivity"
             android:exported="false" />
         <activity

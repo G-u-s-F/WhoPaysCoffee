@@ -63,6 +63,12 @@ public class NewUserGrupActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funció que envia al servidor la crida per afegir un nou grup de l'usuari
+     * @param user
+     * @param nom
+     * @throws JSONException
+     */
     private void addNewGrup(JSONObject user, String nom) throws JSONException {
 
         RequestQueue queue = Volley.newRequestQueue(NewUserGrupActivity.this);

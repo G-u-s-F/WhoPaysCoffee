@@ -1,11 +1,13 @@
 package ioc.codemugteam.whopayscoffee;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +18,14 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
 
     private LayoutInflater mInflater;
     List<Grup> grups;
+    Context context;
+    String jsonMsg;
 
-    public UserGrupsAdapter (Context context, List<Grup> grups){
+    public UserGrupsAdapter (Context context, List<Grup> grups, String jsonMsg){
+        this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.grups = grups;
+        this.jsonMsg = jsonMsg;
     }
     @NonNull
     @Override
@@ -30,7 +36,20 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
 
     @Override
     public void onBindViewHolder(@NonNull UserGrupsAdapter.ItemViewHolder viewHolder, int position) {
-        viewHolder.itemView.setText(grups.get(position).getName());
+        String grupName = grups.get(position).getName();
+        String grupID = String.valueOf(grups.get(position).getId());
+        viewHolder.itemView.setText(grupName);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context ,GrupDetallActivity.class);
+                intent.putExtra("grupID", grupID);
+                intent.putExtra("grupName", grupName);
+                intent.putExtra("user", jsonMsg);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -50,11 +69,13 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
             this.mAdapter = adapter;
             view.setOnClickListener(this);
 
+
+
             deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String nombre = itemView.getText().toString();
-                    itemView.setText("Deleted " + nombre);
+                    Grup grup = grups.get(getAbsoluteAdapterPosition());
+                    Toast.makeText(view.getContext(), "Borrando grupo " + grup.getName(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

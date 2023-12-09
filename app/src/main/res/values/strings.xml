@@ -44,4 +44,8 @@
         <item>Propietari</item>
         <item>Membre</item>
     </string-array>
+    <!-- Afegir membres -->
+    <string name="txt_new_membre_NickName">"Nom del nou membre de grup:"</string>
+    <string name="txt_new_membre_UserName">"Nom de l'usuari a l'aplicació:"</string>
+    <string name="checkbox_new_membre">"Marca si és usuari de l'aplicació"</string>
 </resources>

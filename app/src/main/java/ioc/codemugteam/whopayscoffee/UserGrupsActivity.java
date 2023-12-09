@@ -2,31 +2,22 @@ package ioc.codemugteam.whopayscoffee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import ioc.codemugteam.whopayscoffee.databinding.ActivityUserGrupsBinding;
 
 public class UserGrupsActivity extends AppCompatActivity {
 
@@ -64,7 +53,6 @@ public class UserGrupsActivity extends AppCompatActivity {
         jsonMsg = intent.getStringExtra("user");
         try {
             jsonUser = new JSONObject(jsonMsg);
-            //getAllUserGrups(jsonUser, "all");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -124,6 +112,12 @@ public class UserGrupsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funció que envia al servidor la crida per tots els grups de l'usuari
+     * @param user
+     * @param type
+     * @throws JSONException
+     */
     private void getAllUserGrups(JSONObject user, String type) throws JSONException{
 
         String parametre = type;
@@ -142,7 +136,7 @@ public class UserGrupsActivity extends AppCompatActivity {
                         grup = new Grup(jsonGrup.getString("name"), Integer.parseInt(jsonGrup.getString("id")));
                         grups.add(grup);
                     }
-                    userGrupsAdapter = new UserGrupsAdapter(UserGrupsActivity.this, grups);
+                    userGrupsAdapter = new UserGrupsAdapter(UserGrupsActivity.this, grups, jsonMsg);
                     recyclerView.setAdapter(userGrupsAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(UserGrupsActivity.this));
                 } catch (Throwable e) {

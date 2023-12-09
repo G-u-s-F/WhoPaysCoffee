@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".NewUserGrupActivity">
+    tools:context=".NewMembreActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -17,17 +17,40 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtNewGrup"
+            android:id="@+id/txtNewMembreNickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_new_grup" />
+            android:text="@string/txt_new_membre_NickName"
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextNewGrup"
+            android:id="@+id/editTextNewMembreNickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text" />
+
+        <CheckBox
+            android:id="@+id/checkBoxEsUsuari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_new_membre" />
+
+        <TextView
+            android:id="@+id/txtNewMembreUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_new_membre_UserName"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/editTextNewMembreUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,14 +59,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnNewGrupCancel"
+                android:id="@+id/btnNewMembreCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#73443E"
                 android:text="@string/btn_cancel" />
 
             <Button
-                android:id="@+id/btnNewGrupOK"
+                android:id="@+id/btnNewMembreOK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#73443E"

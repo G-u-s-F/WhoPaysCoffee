@@ -1,11 +1,7 @@
 package ioc.codemugteam.whopayscoffee;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -13,6 +9,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -90,8 +88,8 @@ public class passwordChangeActivity extends AppCompatActivity {
 
     /**
      * Funció que envia al servidor la crida per canviar la contrasenya de l'usuari
+     * @param user
      * @param newPass
-     * @return result
      */
     public void changePass (JSONObject user, String newPass) throws JSONException {
 

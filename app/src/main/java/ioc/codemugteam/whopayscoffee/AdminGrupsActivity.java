@@ -31,7 +31,6 @@ import java.util.Map;
 
 public class AdminGrupsActivity extends AppCompatActivity {
 
-
     private String[] grupsArray = {"grup 1", "grup 2", "grup 3", "grup 4"};
     private final List<Grup> grups = new ArrayList<>();
     private Grup grup;
@@ -62,6 +61,11 @@ public class AdminGrupsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funció que envia al servidor la crida per mostrar tots els grups donats d'alta al sistema
+     * @param admin
+     * @throws JSONException
+     */
     private void getAllGroups(JSONObject admin) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = getString(R.string.serverURL) + "/coffee/api/admin/r/getAllUsers";
@@ -98,7 +102,6 @@ public class AdminGrupsActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(AdminGrupsActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-
             }
         }){
             public Map<String, String> getHeaders() {

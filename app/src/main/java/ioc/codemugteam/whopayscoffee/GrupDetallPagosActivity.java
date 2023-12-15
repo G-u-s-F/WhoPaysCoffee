@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,25 +31,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GrupDetallActivity extends AppCompatActivity {
+public class GrupDetallPagosActivity extends AppCompatActivity {
 
     private final List<Membre> membres = new ArrayList<>();
     private Membre membre;
     private Grup grup;
     private RecyclerView recyclerView;
-    private GrupDetallAdapter grupDetallAdapter;
-    Toolbar grupDetallToolbar;
+    private GrupDetallPagosAdapter grupDetallPagosAdapter;
+    Toolbar grupDetallPagosToolbar;
     FloatingActionButton fab;
     String jsonMsg, grupID, grupName;
     JSONObject jsonUser, jsonMembre;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grup_detall);
+        setContentView(R.layout.activity_grup_detall_pagos);
 
-        recyclerView = findViewById(R.id.items_recyclerview);
-        grupDetallToolbar = findViewById(R.id.user_grup_detall_toolbar);
-        fab = findViewById(R.id.user_grup_detall_fab);
+        recyclerView = findViewById(R.id.items_recyclerview_pagos);
+        grupDetallPagosToolbar = findViewById(R.id.user_grup_detall_pagos_toolbar);
         Intent intent = getIntent();
         grupID = intent.getStringExtra("grupID");
         grupName = intent.getStringExtra("grupName");
@@ -61,21 +60,11 @@ public class GrupDetallActivity extends AppCompatActivity {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        grupDetallToolbar.setTitle(grupName);
-        grupDetallToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        grupDetallPagosToolbar.setTitle(grupName);
+        grupDetallPagosToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GrupDetallActivity.this, NewMembreActivity.class);
-                intent.putExtra("user", jsonMsg);
-                intent.putExtra("groupId", grupID);
-                startActivity(intent);
             }
         });
     }
@@ -96,7 +85,7 @@ public class GrupDetallActivity extends AppCompatActivity {
      */
     private void getGrupMembres(JSONObject user) throws JSONException {
 
-        RequestQueue queue = Volley.newRequestQueue(GrupDetallActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(GrupDetallPagosActivity.this);
         String url = getString(R.string.serverURL) + "/coffee/api/groups/get/members/group/" + grupID;
         String autoritzacio = user.getString("head") + " " + user.getString("token");
 
@@ -115,18 +104,18 @@ public class GrupDetallActivity extends AppCompatActivity {
                                 jsonMembre.getBoolean("isAdmin"));
                         membres.add(membre);
                     }
-                    grupDetallAdapter = new GrupDetallAdapter(GrupDetallActivity.this, membres, jsonMsg);
-                    recyclerView.setAdapter(grupDetallAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(GrupDetallActivity.this));
+                    grupDetallPagosAdapter = new GrupDetallPagosAdapter(GrupDetallPagosActivity.this, membres, jsonMsg);
+                    recyclerView.setAdapter(grupDetallPagosAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(GrupDetallPagosActivity.this));
                 } catch (Throwable e) {
-                    Toast.makeText(GrupDetallActivity.this, "error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GrupDetallPagosActivity.this, "error", Toast.LENGTH_SHORT).show();
                     throw new RuntimeException(e);
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(GrupDetallActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GrupDetallPagosActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

@@ -29,38 +29,56 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.ItemViewHolder>{
+public class GrupDetallPagosAdapter extends RecyclerView.Adapter<GrupDetallPagosAdapter.ItemViewHolder>{
 
     private LayoutInflater mInflater;
-    List<Grup> grups;
+    List<Membre> members;
     Context context;
     String jsonMsg;
 
-    public UserGrupsAdapter (Context context, List<Grup> grups, String jsonMsg){
-        this.context = context;
+    public GrupDetallPagosAdapter (Context context, List<Membre> members, String jsonMsg){
         this.mInflater = LayoutInflater.from(context);
-        this.grups = grups;
+        this.members = members;
+        this.context = context;
         this.jsonMsg = jsonMsg;
     }
+
     @NonNull
     @Override
-    public UserGrupsAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View itemView = mInflater.inflate(R.layout.list_item, viewGroup, false);
-        return new UserGrupsAdapter.ItemViewHolder(itemView, this);
+    public GrupDetallPagosAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View itemView = mInflater.inflate(R.layout.list_item_pagos, viewGroup, false);
+        return new GrupDetallPagosAdapter.ItemViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserGrupsAdapter.ItemViewHolder viewHolder, int position) {
-        String grupName = grups.get(position).getName();
-        String grupID = String.valueOf(grups.get(position).getId());
-        viewHolder.itemView.setText(grupName);
+    public void onBindViewHolder(@NonNull GrupDetallPagosAdapter.ItemViewHolder viewHolder, int position) {
+        String nickName = members.get(position).getNickName();
+        String userName = members.get(position).getUserName();
+        int grupId = members.get(position).getGrupID();
+        boolean isAdmin = members.get(position).getAdmin();
+        viewHolder.itemView.setText(nickName);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context ,GrupDetallActivity.class);
-                intent.putExtra("grupID", grupID);
-                intent.putExtra("grupName", grupName);
+                Intent intent = new Intent(context ,NewPagoActivity.class);
+                intent.putExtra("grupId", grupId);
+                intent.putExtra("nickName", nickName);
+                intent.putExtra("userName", userName);
+                intent.putExtra("isAdmin", isAdmin);
+                intent.putExtra("user", jsonMsg);
+                context.startActivity(intent);
+            }
+        });
+
+        viewHolder.euroIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context ,NewPagoActivity.class);
+                intent.putExtra("grupId", grupId);
+                intent.putExtra("nickName", nickName);
+                intent.putExtra("userName", userName);
+                intent.putExtra("isAdmin", isAdmin);
                 intent.putExtra("user", jsonMsg);
                 context.startActivity(intent);
             }
@@ -71,7 +89,7 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
             public void onClick(View view) {
                 try {
                     int pos = viewHolder.getAbsoluteAdapterPosition();
-                    deleteGrup(grups.get(pos), new JSONObject(jsonMsg), pos, viewHolder);
+                    deleteMembre(members.get(pos), new JSONObject(jsonMsg), pos, viewHolder);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -81,18 +99,19 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
 
     @Override
     public int getItemCount() {
-        return grups.size();
+        return members.size();
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemView;
-        ImageView deleteIcon;
-        UserGrupsAdapter mAdapter;
+        ImageView deleteIcon, euroIcon;
+        GrupDetallPagosAdapter mAdapter;
 
-        public ItemViewHolder(View view, UserGrupsAdapter adapter) {
+        public ItemViewHolder(View view, GrupDetallPagosAdapter adapter) {
             super(view);
-            this.itemView = view.findViewById(R.id.list_item_textView);
-            this.deleteIcon = view.findViewById(R.id.list_item_delete_icon);
+            this.itemView = view.findViewById(R.id.list_item_pagos_textView);
+            this.deleteIcon = view.findViewById(R.id.list_item_pagos_delete_icon);
+            this.euroIcon = view.findViewById(R.id.list_item_pagos_euro_icon);
             this.mAdapter = adapter;
             view.setOnClickListener(this);
         }
@@ -103,17 +122,9 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
         }
     }
 
-    /**
-     * Funció que envia al servidor la crida per eliminar el grup
-     * @param user
-     * @param grup
-     * @param pos
-     * @param viewHolder
-     * @throws JSONException
-     */
-    public void deleteGrup(Grup grup, JSONObject user, int pos, UserGrupsAdapter.ItemViewHolder viewHolder) throws JSONException {
+    public void deleteMembre(Membre membre, JSONObject user, int pos, GrupDetallPagosAdapter.ItemViewHolder viewHolder) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = context.getString(R.string.serverURL) + "/coffee/api/groups/delete/group/" + grup.getId();
+        String url = context.getString(R.string.serverURL) + "/coffee/api/groups/delete/member/from/group/" + membre.getUserID() + "/" + membre.getGrupID();
         String autoritzacio = user.getString("head") + " " + user.getString("token");
 
 
@@ -121,7 +132,7 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
             @Override
             public void onResponse(String response) {
                 Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-                grups.remove(pos);
+                members.remove(pos);
                 viewHolder.mAdapter.notifyDataSetChanged();
             }
         }, error -> Toast.makeText(context, "Fail to get response = " + error, Toast.LENGTH_SHORT).show()) {

@@ -1,3 +1,8 @@
+/**
+ * @author Gustavo Ferrario Barber
+ * M13 DAM 2023-24 S1
+ */
+
 package ioc.codemugteam.whopayscoffee;
 
 public class Membre {
@@ -6,7 +11,7 @@ public class Membre {
     private String nickName, userName;
     private Boolean admin;
 
-    public Membre (int grupId,int userId, String nickName, String userName, Boolean admin){
+    public Membre (int grupId, int userId, String nickName, String userName, Boolean admin){
         this.grupID = grupId;
         this.userID = userId;
         this.nickName = nickName;
@@ -20,6 +25,14 @@ public class Membre {
 
     public void setGrupID(int grupID) {
         this.grupID = grupID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getNickName() {

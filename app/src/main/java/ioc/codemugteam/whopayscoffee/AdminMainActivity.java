@@ -119,9 +119,8 @@ public class AdminMainActivity extends AppCompatActivity {
     }
 
     private void adminGroups() throws JSONException {
-        //getAllUsers(jsonAdmin);
         Intent intent = new Intent(AdminMainActivity.this, AdminGrupsActivity.class);
-        //intent.putExtra("admin", response.toString());
+        intent.putExtra("admin", jsonMsg);
         startActivity(intent);
     }
 

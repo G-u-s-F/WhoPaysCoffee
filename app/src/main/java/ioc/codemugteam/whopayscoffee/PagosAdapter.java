@@ -29,14 +29,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.ItemViewHolder>{
+public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ItemViewHolder>{
 
     private LayoutInflater mInflater;
     List<Grup> grups;
     Context context;
     String jsonMsg;
 
-    public UserGrupsAdapter (Context context, List<Grup> grups, String jsonMsg){
+    public PagosAdapter (Context context, List<Grup> grups, String jsonMsg){
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.grups = grups;
@@ -44,13 +44,13 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
     }
     @NonNull
     @Override
-    public UserGrupsAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public PagosAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View itemView = mInflater.inflate(R.layout.list_item, viewGroup, false);
-        return new UserGrupsAdapter.ItemViewHolder(itemView, this);
+        return new PagosAdapter.ItemViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserGrupsAdapter.ItemViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull PagosAdapter.ItemViewHolder viewHolder, int position) {
         String grupName = grups.get(position).getName();
         String grupID = String.valueOf(grups.get(position).getId());
         viewHolder.itemView.setText(grupName);
@@ -58,7 +58,7 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context ,GrupDetallActivity.class);
+                Intent intent = new Intent(context ,GrupDetallPagosActivity.class);
                 intent.putExtra("grupID", grupID);
                 intent.putExtra("grupName", grupName);
                 intent.putExtra("user", jsonMsg);
@@ -87,9 +87,9 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemView;
         ImageView deleteIcon;
-        UserGrupsAdapter mAdapter;
+        PagosAdapter mAdapter;
 
-        public ItemViewHolder(View view, UserGrupsAdapter adapter) {
+        public ItemViewHolder(View view, PagosAdapter adapter) {
             super(view);
             this.itemView = view.findViewById(R.id.list_item_textView);
             this.deleteIcon = view.findViewById(R.id.list_item_delete_icon);
@@ -111,7 +111,7 @@ public class UserGrupsAdapter extends RecyclerView.Adapter<UserGrupsAdapter.Item
      * @param viewHolder
      * @throws JSONException
      */
-    public void deleteGrup(Grup grup, JSONObject user, int pos, UserGrupsAdapter.ItemViewHolder viewHolder) throws JSONException {
+    public void deleteGrup(Grup grup, JSONObject user, int pos, PagosAdapter.ItemViewHolder viewHolder) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = context.getString(R.string.serverURL) + "/coffee/api/groups/delete/group/" + grup.getId();
         String autoritzacio = user.getString("head") + " " + user.getString("token");

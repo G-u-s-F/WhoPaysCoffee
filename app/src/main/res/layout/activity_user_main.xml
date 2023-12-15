@@ -59,7 +59,7 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="@null"
             android:padding="16dp"
-            app:srcCompat="@drawable/quesito" />
+            app:srcCompat="@drawable/pagos_estadistica" />
 
         <ImageView
             android:id="@+id/imgConf"

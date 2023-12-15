@@ -58,6 +58,13 @@ public class UserMainActivity extends AppCompatActivity {
                 openUserGrups(jsonMsg);
             }
         });
+
+        imgStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openStats(jsonMsg);
+            }
+        });
         imgConf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +110,12 @@ public class UserMainActivity extends AppCompatActivity {
 
     private void openUserGrups(String jsonMsg){
         Intent intent = new Intent(UserMainActivity.this, UserGrupsActivity.class);
+        intent.putExtra("user", jsonMsg);
+        startActivity(intent);
+    }
+
+    private void openStats(String jsonMsg){
+        Intent intent = new Intent(UserMainActivity.this, PagosEstadisticaActivity.class);
         intent.putExtra("user", jsonMsg);
         startActivity(intent);
     }

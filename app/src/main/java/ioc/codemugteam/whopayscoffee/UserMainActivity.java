@@ -89,12 +89,11 @@ public class UserMainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.user_estadistic_item){
-            Toast.makeText(this,"Estadística", Toast.LENGTH_SHORT).show();
+            openStats(jsonMsg);
         }
 
         if (id == R.id.user_conf_item){
             openConf(jsonMsg);
-            Toast.makeText(this,"Configuració", Toast.LENGTH_SHORT).show();
         }
 
         if (id == R.id.user_logout_item){

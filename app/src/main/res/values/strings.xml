@@ -1,6 +1,6 @@
 <resources>
-    <!--<string name="serverURL">http://192.168.0.21:8080</string>  Server en local-->
-    <string name="serverURL">https://coffee-mug-0606.ew.r.appspot.com</string>  <!--Server online-->
+    <string name="serverURL">http://192.168.0.21:8080</string>  <!--Server en local-->
+    <!--<string name="serverURL">https://coffee-mug-0606.ew.r.appspot.com</string>  Server online-->
     <string name="app_name">Who pays coffee</string>
     <string name="user">Usuari</string>
     <string name="user_name">Nom Usuari</string>

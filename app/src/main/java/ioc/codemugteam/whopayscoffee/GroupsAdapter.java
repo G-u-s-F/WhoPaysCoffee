@@ -74,7 +74,5 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ItemViewHo
         public void onClick(View view) {
 
         }
-
-
     }
 }

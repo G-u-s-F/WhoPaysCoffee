@@ -1,3 +1,8 @@
+/**
+ * @author Gustavo Ferrario Barber
+ * M13 DAM 2023-24 S1
+ */
+
 package ioc.codemugteam.whopayscoffee;
 
 public class Total {

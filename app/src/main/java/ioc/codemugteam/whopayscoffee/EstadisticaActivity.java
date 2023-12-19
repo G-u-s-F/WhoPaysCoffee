@@ -1,3 +1,8 @@
+/**
+ * @author Gustavo Ferrario Barber
+ * M13 DAM 2023-24 S1
+ */
+
 package ioc.codemugteam.whopayscoffee;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,17 +96,6 @@ public class EstadisticaActivity extends AppCompatActivity {
             }
         });
     }
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        try {
-            getAllUserGrups(jsonUser, "all");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-*/
 
     /**
      * Funció que envia al servidor la crida per tots els grups de l'usuari

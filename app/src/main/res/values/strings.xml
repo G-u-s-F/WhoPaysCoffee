@@ -1,6 +1,6 @@
 <resources>
     <!--<string name="serverURL">http://192.168.0.21:8080</string>  Server en local-->
-    <string name="serverURL">https://coffee-mug-0606.ew.r.appspot.com</string> <!-- Server online-->
+    <string name="serverURL">https://coffee-mug-0606.ew.r.appspot.com</string>  <!--Server online-->
     <string name="app_name">Who pays coffee</string>
     <string name="user">Usuari</string>
     <string name="user_name">Nom Usuari</string>
@@ -57,7 +57,9 @@
     <string name="checkBox_membre_detall_isAdmin">"Es administrador del grup"</string>
     <string name="btn_membre_detall_tornar">"Tornar"</string>
     <string name="appBar_titol">"Dades del membre"</string>
-    <!-- Membre detall -->
-    <string name="data_inici">Data inici</string>
-    <string name="data_final">Data fi</string>
+    <!-- Detall estadistica grup -->
+    <string name="data_inici">"Data inici"</string>
+    <string name="data_final">"Data fi"</string>
+    <!-- Nou pagament -->
+    <string name="new_pagament_usuari">"Nou pagament de l'usuari "</string>
 </resources>

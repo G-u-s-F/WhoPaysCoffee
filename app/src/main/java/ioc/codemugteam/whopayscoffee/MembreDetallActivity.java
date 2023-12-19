@@ -92,7 +92,7 @@ public class MembreDetallActivity extends AppCompatActivity {
                 save.setVisibility(view.VISIBLE);
                 editTextNickName.setEnabled(true);
                 editTextNickName.requestFocus();
-                //editTextNickName.selectAll();
+                editTextNickName.selectAll();
             }
         });
 
@@ -198,7 +198,7 @@ public class MembreDetallActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.PUT, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(MembreDetallActivity.this, response, Toast.LENGTH_SHORT).show();

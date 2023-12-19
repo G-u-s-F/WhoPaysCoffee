@@ -124,7 +124,7 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ItemViewHold
                 grups.remove(pos);
                 viewHolder.mAdapter.notifyDataSetChanged();
             }
-        }, error -> Toast.makeText(context, "Fail to get response = " + error, Toast.LENGTH_SHORT).show()) {
+        }, error -> Toast.makeText(context, "Només el propietari pot eliminar el grup", Toast.LENGTH_SHORT).show()) {
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();

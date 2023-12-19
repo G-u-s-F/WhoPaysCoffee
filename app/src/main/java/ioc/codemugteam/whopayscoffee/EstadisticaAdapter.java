@@ -27,14 +27,11 @@ public class EstadisticaAdapter extends RecyclerView.Adapter<EstadisticaAdapter.
     String jsonMsg;
 
     public EstadisticaAdapter (Context context, List<Grup> grups, String jsonMsg){
-        Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
 
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.grups = grups;
         this.jsonMsg = jsonMsg;
-        Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
-
     }
     @NonNull
     @Override
@@ -46,7 +43,7 @@ public class EstadisticaAdapter extends RecyclerView.Adapter<EstadisticaAdapter.
     @Override
     public void onBindViewHolder(@NonNull EstadisticaAdapter.ItemViewHolder viewHolder, int position) {
         String grupName = grups.get(position).getName();
-        String grupID = String.valueOf(grups.get(position).getId());
+        int grupID = grups.get(position).getId();
         viewHolder.itemView.setText(grupName);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

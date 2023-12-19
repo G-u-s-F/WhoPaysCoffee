@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".GrupDetallEstadisticaActivity">
+    tools:context=".MembrePagosDetallActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayoutGrupDetallestadistica"
+        android:id="@+id/appBarLayoutMembrePagosDetall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFFFFF"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/user_grup_detall_estadistica_toolbar"
+            android:id="@+id/membre_pagos_detall_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
@@ -30,20 +30,20 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/textViewDataInici"
+        android:id="@+id/textViewMembrePagoDataInici"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:foregroundTint="@color/white"
         android:text="@string/data_inici"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutGrupDetallestadistica" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMembrePagosDetall" />
 
     <TextView
-        android:id="@+id/textViewDataFi"
+        android:id="@+id/textViewMembrePagosDataFi"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -51,29 +51,45 @@
         android:text="@string/data_final"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewDataInici"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutGrupDetallestadistica" />
+        app:layout_constraintStart_toEndOf="@+id/textViewMembrePagoDataInici"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMembrePagosDetall" />
 
     <ImageButton
-        android:id="@+id/imageButtonRefreshEstadistica"
+        android:id="@+id/imageButtonRefreshMembrePago"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutGrupDetallestadistica"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMembrePagosDetall"
         app:srcCompat="@drawable/refresh" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pie_chart"
-        android:layout_width="350dp"
-        android:layout_height="550dp"
-        android:layout_marginBottom="24dp"
+    <include
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMembrePagoDataInici" />
+
+    <TextView
+        android:id="@+id/amountTotalPagosDetall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/round_corner_view"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FADFD0"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </com.github.mikephil.charting.charts.PieChart>
+        tools:text="placeholder text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

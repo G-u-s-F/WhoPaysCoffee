@@ -98,7 +98,7 @@ public class GrupDetallPagosActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++){
                         jsonMembre = jsonArray.getJSONObject(i);
                         membre = new Membre(jsonMembre.getInt("groupId"),
-                                jsonMembre.getInt("userId"),
+                                jsonMembre.getInt("memberId"),
                                 jsonMembre.getString("nickname"),
                                 jsonMembre.getString("username"),
                                 jsonMembre.getBoolean("isAdmin"));

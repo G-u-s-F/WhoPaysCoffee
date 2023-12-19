@@ -54,6 +54,7 @@ public class GrupDetallPagosAdapter extends RecyclerView.Adapter<GrupDetallPagos
     public void onBindViewHolder(@NonNull GrupDetallPagosAdapter.ItemViewHolder viewHolder, int position) {
         String nickName = members.get(position).getNickName();
         String userName = members.get(position).getUserName();
+        int membreId = members.get(position).getUserID();
         int grupId = members.get(position).getGrupID();
         boolean isAdmin = members.get(position).getAdmin();
         viewHolder.itemView.setText(nickName);
@@ -61,11 +62,10 @@ public class GrupDetallPagosAdapter extends RecyclerView.Adapter<GrupDetallPagos
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context ,NewPagoActivity.class);
-                intent.putExtra("grupId", grupId);
+                Intent intent = new Intent(context ,MembrePagosDetallActivity.class);
+                intent.putExtra("grupId", String.valueOf(grupId));
                 intent.putExtra("nickName", nickName);
-                intent.putExtra("userName", userName);
-                intent.putExtra("isAdmin", isAdmin);
+                intent.putExtra("membreId", String.valueOf(membreId));
                 intent.putExtra("user", jsonMsg);
                 context.startActivity(intent);
             }
@@ -77,8 +77,7 @@ public class GrupDetallPagosAdapter extends RecyclerView.Adapter<GrupDetallPagos
                 Intent intent = new Intent(context ,NewPagoActivity.class);
                 intent.putExtra("grupId", grupId);
                 intent.putExtra("nickName", nickName);
-                intent.putExtra("userName", userName);
-                intent.putExtra("isAdmin", isAdmin);
+                intent.putExtra("membreId", membreId);
                 intent.putExtra("user", jsonMsg);
                 context.startActivity(intent);
             }
